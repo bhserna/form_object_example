@@ -1,0 +1,9 @@
+%h1 New account
+
+= form_with model: @account do |f|
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  %p
+    = f.button

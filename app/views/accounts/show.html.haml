@@ -1,0 +1,22 @@
+= link_to "< Accounts", accounts_path
+
+%h1 Account: #{@account.name}
+
+= link_to "Add Inflow", new_account_inflow_path(@account)
+= link_to "Add Expense", new_account_expense_path(@account)
+
+%table
+  %thead
+    %th ID
+    %th To/From
+    %th Description
+    %th Inflow
+    %th Outflow
+  %tbody
+    - @account.transactions.map do |transaction|
+      %tr
+        %td= transaction.id
+        %td(data-role="target-name")= transaction.target_name
+        %td(data-role="description")= transaction.description
+        %td(data-role="inflow")= number_to_currency(transaction.inflow) if transaction.inflow.present?
+        %td(data-role="outflow")= number_to_currency(transaction.outflow) if transaction.outflow.present?
