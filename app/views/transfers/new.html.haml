@@ -1,0 +1,21 @@
+%h1 New transfer
+
+= form_with model: @transfer, url: account_transfers_path(@account) do |f|
+  = f.hidden_field :source_account_id
+  %p
+    = f.label :date
+    %br
+    .date-inputs
+      = f.date_select :date, selected: Date.current
+  %p
+    = f.label :target_account_id
+    %br
+    = f.select :target_account_id,
+      options_from_collection_for_select(@transfer.target_options, :id, :name)
+  %p
+    = f.label :amount
+    %br
+    = f.number_field :amount
+    = errors_for @transfer, :amount
+  %p
+    = f.button

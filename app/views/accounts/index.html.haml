@@ -1,6 +1,7 @@
-%h1 Accounts
+%h1 All Accounts
 
-= link_to "Add account", new_account_path
+%nav
+  = link_to "Add account", new_account_path
 
 %ul
   - @accounts.each do |account|

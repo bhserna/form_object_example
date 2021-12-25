@@ -18,7 +18,7 @@ class InflowsController < ApplicationController
   private
 
   def inflow_params
-    params.require(:transaction).permit(:payer_name, :description, :amount)
+    params.require(:transaction).permit(:date, :payer_name, :description, :amount)
   end
 
   def set_account

@@ -1,0 +1,6 @@
+- if model.errors.any?
+  .errors
+    %h3= pluralize(model.errors.count, "error")
+    %ul
+      - model.errors.each do |error|
+        %li= error.full_message

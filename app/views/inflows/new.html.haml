@@ -2,9 +2,15 @@
 
 = form_with model: @inflow, url: account_inflows_path(@account) do |f|
   %p
+    = f.label :date
+    %br
+    .date-inputs
+      = f.date_select :date, selected: Date.current
+  %p
     = f.label :payer_name
     %br
     = f.text_field :payer_name
+    = errors_for @inflow, :target_name
   %p
     = f.label :description
     %br
@@ -13,5 +19,6 @@
     = f.label :amount
     %br
     = f.number_field :amount
+    = errors_for @inflow, :amount
   %p
     = f.button

@@ -11,7 +11,7 @@ class AccountsController < ApplicationController
     @account = Account.new(account_params)
 
     if @account.save
-      redirect_to @account, notice: "Account sucessfully created"
+      redirect_to accounts_path
     else
       render :new, :unprocessable_entity
     end

@@ -8,11 +8,13 @@ RSpec.describe "User adds inflow" do
 
     click_on "Add Inflow"
 
+    select_date Date.current, from: "transaction_date"
     fill_in "Payer name", with: "Job"
     fill_in "Description", with: "Job inflow"
     fill_in "Amount", with: "100"
     click_on "Create"
 
+    expect(page).to have_date Date.current
     expect(page).to have_target_name "Job"
     expect(page).to have_description "Job inflow"
     expect(page).to have_inflow "$100.00"

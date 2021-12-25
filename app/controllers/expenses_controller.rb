@@ -7,9 +7,10 @@ class ExpensesController < ApplicationController
 
   def create
     @expense = @account.transactions.build(inflow_params)
-    @expense.amount = @expense.amount * -1
 
-    if @expense.save
+    if @expense.valid?
+      @expense.amount = @expense.amount * -1
+      @expense.save!
       redirect_to @account
     else
       render :new, status: :unprocessable_entity
@@ -19,7 +20,7 @@ class ExpensesController < ApplicationController
   private
 
   def inflow_params
-    params.require(:transaction).permit(:payee_name, :description, :amount)
+    params.require(:transaction).permit(:date, :payee_name, :description, :amount)
   end
 
   def set_account

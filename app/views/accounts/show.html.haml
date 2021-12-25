@@ -1,21 +1,31 @@
-= link_to "< Accounts", accounts_path
+.breadcrubms
+  = link_to "All accounts", accounts_path, style: "display: inline"
+  %span /
+  %span account
 
-%h1 Account: #{@account.name}
 
-= link_to "Add Inflow", new_account_inflow_path(@account)
-= link_to "Add Expense", new_account_expense_path(@account)
+%h1= @account.name
+
+%span Balance: #{number_to_currency @account.balance}
+
+%nav
+  = link_to "Add Inflow", new_account_inflow_path(@account)
+  = link_to "Add Expense", new_account_expense_path(@account)
+  = link_to "Add Transfer", new_account_transfer_path(@account)
 
 %table
   %thead
     %th ID
+    %th Date
     %th To/From
     %th Description
     %th Inflow
     %th Outflow
   %tbody
-    - @account.transactions.map do |transaction|
+    - @account.transactions.order(id: :desc).map do |transaction|
       %tr
         %td= transaction.id
+        %td(data-role="date")= transaction.date
         %td(data-role="target-name")= transaction.target_name
         %td(data-role="description")= transaction.description
         %td(data-role="inflow")= number_to_currency(transaction.inflow) if transaction.inflow.present?

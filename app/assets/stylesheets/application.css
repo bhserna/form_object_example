@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+.breadcrubms { margin: 1rem 0; }
+.breadcrubms a { display: inline; }
+
+.errors { color: red; }
+
+.date-inputs { display: flex; }
+.date-inputs select { margin-right: 0.5rem; }
+.date-inputs select:nth-of-type(1) { max-width: 8rem; }
+.date-inputs select:nth-of-type(2) { max-width: 10rem; }
+.date-inputs select:nth-of-type(3) { max-width: 8rem; }
