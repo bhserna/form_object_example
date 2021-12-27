@@ -13,9 +13,8 @@
   = link_to "Add Expense", new_account_expense_path(@account)
   = link_to "Add Transfer", new_account_transfer_path(@account)
 
-%table
+%table.transactions
   %thead
-    %th ID
     %th Date
     %th To/From
     %th Description
@@ -24,7 +23,6 @@
   %tbody
     - @account.transactions.order(id: :desc).map do |transaction|
       %tr
-        %td= transaction.id
         %td(data-role="date")= transaction.date
         %td(data-role="target-name")= transaction.target_name
         %td(data-role="description")= transaction.description
