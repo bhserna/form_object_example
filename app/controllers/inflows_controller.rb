@@ -20,8 +20,4 @@ class InflowsController < ApplicationController
   def inflow_params
     params.require(:transaction).permit(:date, :payer_name, :description, :amount)
   end
-
-  def set_account
-    @account = Account.find(params[:account_id])
-  end
 end

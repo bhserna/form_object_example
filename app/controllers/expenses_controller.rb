@@ -2,15 +2,14 @@ class ExpensesController < ApplicationController
   before_action :set_account
 
   def new
-    @expense = Transaction.new
+    @expense = Expense.new(account: @account)
   end
 
   def create
-    @expense = @account.transactions.build(inflow_params)
+    @expense = Expense.new(expense_params)
+    @expense.account = @account
 
-    if @expense.valid?
-      @expense.amount = @expense.amount * -1
-      @expense.save!
+    if @expense.save
       redirect_to @account
     else
       render :new, status: :unprocessable_entity
@@ -19,11 +18,9 @@ class ExpensesController < ApplicationController
 
   private
 
-  def inflow_params
-    params.require(:transaction).permit(:date, :payee_name, :description, :amount)
-  end
-
-  def set_account
-    @account = Account.find(params[:account_id])
+  def expense_params
+    params.require(:expense)
+      .permit(:payee_name, :description, :amount)
+      .merge(date: date_from_params(:expense))
   end
 end

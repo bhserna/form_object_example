@@ -8,7 +8,7 @@ RSpec.describe "User adds expense" do
 
     click_on "Add Expense"
 
-    select_date Date.current, from: "transaction_date"
+    select_date Date.current, from: "expense_date"
     fill_in "Payee name", with: "Store"
     fill_in "Description", with: "Store outflow"
     fill_in "Amount", with: "100"

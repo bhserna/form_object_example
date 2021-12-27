@@ -17,22 +17,9 @@ class TransfersController < ApplicationController
 
   private
 
-  def set_account
-    @account = Account.find(params[:account_id])
-  end
-
   def transfer_params
-    params
-      .require(:transfer)
+    params.require(:transfer)
       .permit(:source_account_id, :target_account_id, :amount)
-      .merge(date: transfer_date)
-  end
-
-  def transfer_date
-    Date.new(*transfer_date_args)
-  end
-
-  def transfer_date_args
-    %w(1 2 3).map { |e| params[:transfer]["date(#{e}i)"].to_i }
+      .merge(date: date_from_params(:transfer))
   end
 end

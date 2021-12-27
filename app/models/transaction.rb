@@ -3,7 +3,6 @@ class Transaction < ApplicationRecord
   validates_presence_of :date, :target_name, :amount
 
   alias_attribute :payer_name, :target_name
-  alias_attribute :payee_name, :target_name
 
   def self.transfer(date:, source_account:, target_account:, amount:)
     transaction do
